@@ -1,0 +1,1 @@
+alert("Tekan Ok Untuk Ke WEB")
