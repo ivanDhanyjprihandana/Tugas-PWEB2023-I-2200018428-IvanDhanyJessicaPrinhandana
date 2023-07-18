@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Website Laundry</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: skyblue;
+            background-image: url(https://img.freepik.com/free-photo/front-view-white-basket-with-towels_23-2148251849.jpg?w=1800&t=st=1689525598~exp=1689526198~hmac=46ee2895e4d494071f35c3cf0f0871b9c629a3ea4b74276defba85ec226b56dd);
+        }
+        
+        h1 {
+            text-align: center;
+        }
+        
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        
+        .order-form {
+            width: 400px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .order-form h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .order-form table {
+            width: 100%;
+        }
+        
+        .order-form th, .order-form td {
+            padding: 8px;
+            border: 1px solid #ccc;
+        }
+        
+        .order-form th {
+            background-color: lightseagreen;
+            color: black;
+            text-align: left;
+        }
+        
+        .order-form input[type=text], .order-form select {
+            width: 90%;
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+        
+        .order-form button {
+            background-color: lightseagreen;
+            color: black;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            float: right;
+            margin-top: 20px;
+        }
+        
+        .package-info {
+            font-size: 14px;
+            color: #888;
+            text-align: center;
+            margin-top: 10px;
+            display: none;
+        }
+        
+        .flow-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .flow-item {
+            text-align: center;
+            margin: 0 10px;
+            background-color: #fff;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .flow-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .flow-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 20px 20px 0 0;
+        }
+        
+        .flow-item p {
+            padding: 10px;
+            font-weight: bold;
+        }
+        
+        .flow-item:hover .package-info {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <h1>Selamat datang di Website Laundry</h1>
+    <div class="container">
+        <div class="flow-container">
+            <div class="flow-item" onclick="selectPackage('Paket Setrika')">
+                <img src="https://img.freepik.com/free-photo/electric-iron-pile-clothes_93675-131974.jpg?w=1800&t=st=1689525333~exp=1689525933~hmac=61fabd7e5230016141a562f7fdb62afb0274bc6153e88ee4b04478c376034469" alt="Paket Setrika">
+                <p>Paket Setrika</p>
+                <div class="package-info">
+                    <span>Harga: Rp 10.000/kg</span>
+                </div>
+            </div>
+            <div class="flow-item" onclick="selectPackage('Paket Reguler')">
+                <img src="https://img.freepik.com/free-photo/clothes-laundry-wooden-basket-isolated-white-background_93675-131975.jpg?w=1060&t=st=1689525473~exp=1689526073~hmac=ed0be2d89661214d3db47c74d74b048da6ddd330544837e69aa30855390a92e6" alt="Paket B">
+                <p>Paket Reguler</p>
+                <div class="package-info">
+                    <span>Harga: Rp 15.000/kg</span>
+                </div>
+            </div>
+            <div class="flow-item" onclick="selectPackage('Paket Express')">
+                <img src="https://img.freepik.com/free-photo/stack-t-shirt-polo_74190-2482.jpg?w=1800&t=st=1689525519~exp=1689526119~hmac=9d2058df27a2cb729fe35f529b9eff26877902b3fc01c234091febfb0102b841" alt="Paket C">
+                <p>Paket Express</p>
+                <div class="package-info">
+                    <span>Harga: Rp 20.000/kg</span>
+                </div>
+            </div>
+        </div>
+        <div id="order-form" class="order-form" style="display: none;">
+            <h2>Form Orderan</h2>
+            <form action="proses.php" method="post">
+                <table>
+                    <tr>
+                        <th>Nama:</th>
+                        <td><input type="text" name="name" required></td>
+                    </tr>
+                    <tr>
+                        <th>Paket:</th>
+                        <td>
+                            <select name="package" id="package" required>
+                                <option value="">Pilih Paket</option>
+                                <option value="Paket Setrika">Paket A (Harga: Rp 10.000/kg)</option>
+                                <option value="Paket Reguler">Paket B (Harga: Rp 15.000/kg)</option>
+                                <option value="Paket Express">Paket C (Harga: Rp 20.000/kg)</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Jumlah Berat:</th>
+                        <td><input type="text" name="weight" required></td>
+                    </tr>
+                </table>
+                <button type="submit">Order</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function selectPackage(packageName) {
+            var orderForm = document.getElementById('order-form');
+            var packageSelect = document.getElementById('package');
+            
+            orderForm.style.display = 'block';
+            packageSelect.value = packageName;
+            
+        }
+    </script>
+</body>
+</html>
